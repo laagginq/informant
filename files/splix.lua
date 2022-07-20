@@ -602,7 +602,7 @@ do
             window.watermark = {visible = false}
             --
             local info = info or {}
-            local watermark_name = info.name or info.Name or info.title or info.Title or string.format("informant - fps : %u - uid : %u", 1, 100, 200)
+            local watermark_name = info.name or info.Name or info.title or info.Title or string.format("informant - fps : %u - ping : %u", 1, 100, 200)
             --
             local text_bounds = utility:GetTextBounds(watermark_name, theme.textsize, theme.font)
             --
@@ -643,7 +643,7 @@ do
             })
             --
             local watermark_title = utility:Create("TextLabel", {Vector2.new(2 + 6,4), watermark_outline}, {
-                Text = string.format("informant - fps : %u - uid : %u", 35, 2),
+                Text = string.format("informant - fps : %u - ping : %u", 35, 2),
                 Size = theme.textsize,
                 Font = theme.font,
                 Color = theme.textcolor,
@@ -681,12 +681,12 @@ do
                 library.shared.ping = tonumber(string.split(stats.Network.ServerStatsItem["Data Ping"]:GetValueString(), " ")[1] .. "")
             end)
             --
-            watermark_title.Text = string.format("informant - fps : %u - uid : %u", tostring(library.shared.ping), library.shared.fps)
+            watermark_title.Text = string.format("informant - fps : %u - ping : %u", tostring(library.shared.ping), library.shared.fps)
             window.watermark:UpdateSize()
             --
             spawn(function()
                 while wait(0.1) do
-                    watermark_title.Text = string.format("informant - fps : %u - uid : %u", 1, tostring(library.shared.ping), library.shared.fps)
+                    watermark_title.Text = string.format("informant - fps : %u - ping : %u", tostring(library.shared.ping), library.shared.fps)
                     window.watermark:UpdateSize()
                 end
             end)
