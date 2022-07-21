@@ -1,206 +1,215 @@
-local Nofitication = {}
+local TweenService = game:GetService("TweenService");
+local RunService = game:GetService("RunService");
+local TextService = game:GetService("TextService");
 
+local Player = game:GetService("Players").LocalPlayer;
 
-local STX_Nofitication = Instance.new("ScreenGui")
-local STX_NofiticationUIListLayout = Instance.new("UIListLayout")
-STX_Nofitication.Name = "STX_Nofitication"
-if syn then syn.protect_gui(STX_Nofitication) end
-STX_Nofitication.Parent = game.CoreGui
-STX_Nofitication.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-STX_Nofitication.ResetOnSpawn = false
-    
-STX_NofiticationUIListLayout.Name = "STX_NofiticationUIListLayout"
-STX_NofiticationUIListLayout.Parent = STX_Nofitication
-STX_NofiticationUIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
-STX_NofiticationUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-STX_NofiticationUIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+local NotifGui = Instance.new("ScreenGui");
+NotifGui.Name = "AkaliNotif";
+NotifGui.Parent = RunService:IsStudio() and Player.PlayerGui or game:GetService("CoreGui");
 
-local GUI = game:GetService("CoreGui"):FindFirstChild("STX_Nofitication")
-function Nofitication:Notify(nofdebug, middledebug, all)
-    local SelectedType = string.lower(tostring(middledebug.Type))
-    local ambientShadow = Instance.new("ImageLabel")
-    local Window = Instance.new("Frame")
-    local Outline_A = Instance.new("Frame")
-    local WindowTitle = Instance.new("TextLabel")
-    local WindowDescription = Instance.new("TextLabel")
-    
-    ambientShadow.Name = "ambientShadow"
-    ambientShadow.Parent = GUI
-    ambientShadow.AnchorPoint = Vector2.new(0.5, 0.5)
-    ambientShadow.BackgroundTransparency = 1.000
-    ambientShadow.BorderSizePixel = 0
-    ambientShadow.Position = UDim2.new(0.91525954, 0, 0.936809778, 0)
-    ambientShadow.Size = UDim2.new(0, 0, 0, 0)
-    ambientShadow.Image = "rbxassetid://1316045217"
-    ambientShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
-    ambientShadow.ImageTransparency = 0.400
-    ambientShadow.ScaleType = Enum.ScaleType.Slice
-    ambientShadow.SliceCenter = Rect.new(10, 10, 118, 118)
-    
-    Window.Name = "Window"
-    Window.Parent = ambientShadow
-    Window.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-    Window.BorderSizePixel = 0
-    Window.Position = UDim2.new(0, 5, 0, 5)
-    Window.Size = UDim2.new(0, 230, 0, 80)
-    Window.ZIndex = 2
-    
-    Outline_A.Name = "Outline_A"
-    Outline_A.Parent = Window
-    Outline_A.BackgroundColor3 = middledebug.OutlineColor
-    Outline_A.BorderSizePixel = 0
-    Outline_A.Position = UDim2.new(0, 0, 0, 25)
-    Outline_A.Size = UDim2.new(0, 230, 0, 2)
-    Outline_A.ZIndex = 5
-    
-    WindowTitle.Name = "WindowTitle"
-    WindowTitle.Parent = Window
-    WindowTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    WindowTitle.BackgroundTransparency = 1.000
-    WindowTitle.BorderColor3 = Color3.fromRGB(27, 42, 53)
-    WindowTitle.BorderSizePixel = 0
-    WindowTitle.Position = UDim2.new(0, 8, 0, 2)
-    WindowTitle.Size = UDim2.new(0, 222, 0, 22)
-    WindowTitle.ZIndex = 4
-    WindowTitle.Font = Enum.Font.GothamSemibold
-    WindowTitle.Text = nofdebug.Title
-    WindowTitle.TextColor3 = Color3.fromRGB(220, 220, 220)
-    WindowTitle.TextSize = 12.000
-    WindowTitle.TextXAlignment = Enum.TextXAlignment.Left
-    
-    WindowDescription.Name = "WindowDescription"
-    WindowDescription.Parent = Window
-    WindowDescription.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    WindowDescription.BackgroundTransparency = 1.000
-    WindowDescription.BorderColor3 = Color3.fromRGB(27, 42, 53)
-    WindowDescription.BorderSizePixel = 0
-    WindowDescription.Position = UDim2.new(0, 8, 0, 34)
-    WindowDescription.Size = UDim2.new(0, 216, 0, 40)
-    WindowDescription.ZIndex = 4
-    WindowDescription.Font = Enum.Font.GothamSemibold
-    WindowDescription.Text = nofdebug.Description
-    WindowDescription.TextColor3 = Color3.fromRGB(180, 180, 180)
-    WindowDescription.TextSize = 12.000
-    WindowDescription.TextWrapped = true
-    WindowDescription.TextXAlignment = Enum.TextXAlignment.Left
-    WindowDescription.TextYAlignment = Enum.TextYAlignment.Top
+local Container = Instance.new("Frame");
+Container.Name = "Container";
+Container.Position = UDim2.new(0, 20, 0.5, -20);
+Container.Size = UDim2.new(0, 300, 0.5, 0);
+Container.BackgroundTransparency = 1;
+Container.Parent = NotifGui;
 
-    if SelectedType == "default" then
-        local function ORBHB_fake_script()
-            local script = Instance.new('LocalScript', ambientShadow)
-        
-            ambientShadow:TweenSize(UDim2.new(0, 240, 0, 90), "Out", "Linear", 0.2)
-            Window.Size = UDim2.new(0, 230, 0, 80)
-            Outline_A:TweenSize(UDim2.new(0, 0, 0, 2), "Out", "Linear", middledebug.Time)
-    
-            wait(middledebug.Time)
-        
-            ambientShadow:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.2)
-            
-            wait(0.2)
-            ambientShadow:Destroy()
-        end
-        coroutine.wrap(ORBHB_fake_script)()
-    elseif SelectedType == "image" then
-        ambientShadow:TweenSize(UDim2.new(0, 240, 0, 90), "Out", "Linear", 0.2)
-        Window.Size = UDim2.new(0, 230, 0, 80)
-        WindowTitle.Position = UDim2.new(0, 24, 0, 2)
-        local ImageButton = Instance.new("ImageButton")
-        ImageButton.Parent = Window
-        ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        ImageButton.BackgroundTransparency = 1.000
-        ImageButton.BorderSizePixel = 0
-        ImageButton.Position = UDim2.new(0, 4, 0, 4)
-        ImageButton.Size = UDim2.new(0, 18, 0, 18)
-        ImageButton.ZIndex = 5
-        ImageButton.AutoButtonColor = false
-        ImageButton.Image = all.Image
-        ImageButton.ImageColor3 = all.ImageColor
-
-        local function ORBHB_fake_script()
-            local script = Instance.new('LocalScript', ambientShadow)
-        
-            Outline_A:TweenSize(UDim2.new(0, 0, 0, 2), "Out", "Linear", middledebug.Time)
-
-            wait(middledebug.Time)
-        
-            ambientShadow:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.2)
-            
-            wait(0.2)
-            ambientShadow:Destroy()
-        end
-        coroutine.wrap(ORBHB_fake_script)()
-    elseif SelectedType == "option" then
-        ambientShadow:TweenSize(UDim2.new(0, 240, 0, 110), "Out", "Linear", 0.2)
-        Window.Size = UDim2.new(0, 230, 0, 100)
-        local Uncheck = Instance.new("ImageButton")
-        local Check = Instance.new("ImageButton")
-        
-        Uncheck.Name = "Uncheck"
-        Uncheck.Parent = Window
-        Uncheck.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Uncheck.BackgroundTransparency = 1.000
-        Uncheck.BorderSizePixel = 0
-        Uncheck.Position = UDim2.new(0, 7, 0, 76)
-        Uncheck.Size = UDim2.new(0, 18, 0, 18)
-        Uncheck.ZIndex = 5
-        Uncheck.AutoButtonColor = false
-        Uncheck.Image = "http://www.roblox.com/asset/?id=6031094678"
-        Uncheck.ImageColor3 = Color3.fromRGB(255, 84, 84)
-        
-        Check.Name = "Check"
-        Check.Parent = Window
-        Check.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Check.BackgroundTransparency = 1.000
-        Check.BorderSizePixel = 0
-        Check.Position = UDim2.new(0, 28, 0, 76)
-        Check.Size = UDim2.new(0, 18, 0, 18)
-        Check.ZIndex = 5
-        Check.AutoButtonColor = false
-        Check.Image = "http://www.roblox.com/asset/?id=6031094667"
-        Check.ImageColor3 = Color3.fromRGB(83, 230, 50)
-
-        local function ORBHB_fake_script()
-            local script = Instance.new('LocalScript', ambientShadow)
-        
-            local Stilthere = true
-            local function Unchecked()
-                pcall(function()
-                    all.Callback(false)
-                end)
-                ambientShadow:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.2)
-                
-                wait(0.2)
-                ambientShadow:Destroy()
-                Stilthere = false
-            end
-            local function Checked()
-                pcall(function()
-                    all.Callback(true)
-                end)
-                ambientShadow:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.2)
-                
-                wait(0.2)
-                ambientShadow:Destroy()
-                Stilthere = false
-            end
-            Uncheck.MouseButton1Click:Connect(Unchecked)
-            Check.MouseButton1Click:Connect(Checked)
-            
-            Outline_A:TweenSize(UDim2.new(0, 0, 0, 2), "Out", "Linear", middledebug.Time)
-    
-            wait(middledebug.Time)
-
-            if Stilthere == true then
-        
-                ambientShadow:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.2)
-                
-                wait(0.2)
-                ambientShadow:Destroy()
-            end
-        end
-        coroutine.wrap(ORBHB_fake_script)()
-    end
+local function Image(ID, Button)
+	local NewImage = Instance.new(string.format("Image%s", Button and "Button" or "Label"));
+	NewImage.Image = ID;
+	NewImage.BackgroundTransparency = 1;
+	return NewImage;
 end
 
-return Nofitication
+local function Round2px()
+	local NewImage = Image("http://www.roblox.com/asset/?id=5761488251");
+	NewImage.ScaleType = Enum.ScaleType.Slice;
+	NewImage.SliceCenter = Rect.new(2, 2, 298, 298);
+	NewImage.ImageColor3 = Color3.fromRGB(30, 30, 30);
+	return NewImage;
+end
+
+local function Shadow2px()
+	local NewImage = Image("http://www.roblox.com/asset/?id=5761498316");
+	NewImage.ScaleType = Enum.ScaleType.Slice;
+	NewImage.SliceCenter = Rect.new(17, 17, 283, 283);
+	NewImage.Size = UDim2.fromScale(1, 1) + UDim2.fromOffset(30, 30);
+	NewImage.Position = -UDim2.fromOffset(15, 15);
+	NewImage.ImageColor3 = Color3.fromRGB(30, 30, 30);
+	return NewImage;
+end
+
+local Padding = 10;
+local DescriptionPadding = 10;
+local InstructionObjects = {};
+local TweenTime = 1;
+local TweenStyle = Enum.EasingStyle.Sine;
+local TweenDirection = Enum.EasingDirection.Out;
+
+local LastTick = tick();
+
+local function CalculateBounds(TableOfObjects)
+	local TableOfObjects = typeof(TableOfObjects) == "table" and TableOfObjects or {};
+	local X, Y = 0, 0;
+	for _, Object in next, TableOfObjects do
+		X += Object.AbsoluteSize.X;
+		Y += Object.AbsoluteSize.Y;
+	end
+	return {X = X, Y = Y, x = X, y = Y};
+end
+
+local CachedObjects = {};
+
+local function Update()
+	local DeltaTime = tick() - LastTick;
+	local PreviousObjects = {};
+	for CurObj, Object in next, InstructionObjects do
+		local Label, Delta, Done = Object[1], Object[2], Object[3];
+		if (not Done) then
+			if (Delta < TweenTime) then
+				Object[2] = math.clamp(Delta + DeltaTime, 0, 1);
+				Delta = Object[2];
+			else
+				Object[3] = true;
+			end
+		end
+		local NewValue = TweenService:GetValue(Delta, TweenStyle, TweenDirection);
+		local CurrentPos = Label.Position;
+		local PreviousBounds = CalculateBounds(PreviousObjects);
+		local TargetPos = UDim2.new(0, 0, 0, PreviousBounds.Y + (Padding * #PreviousObjects));
+		Label.Position = CurrentPos:Lerp(TargetPos, NewValue);
+		table.insert(PreviousObjects, Label);
+	end
+	CachedObjects = PreviousObjects;
+	LastTick = tick();
+end
+
+RunService:BindToRenderStep("UpdateList", 0, Update);
+
+local TitleSettings = {
+	Font = Enum.Font.GothamSemibold;
+	Size = 14;
+}
+
+local DescriptionSettings = {
+	Font = Enum.Font.Gotham;
+	Size = 14;
+}
+
+local MaxWidth = (Container.AbsoluteSize.X - Padding - DescriptionPadding);
+
+local function Label(Text, Font, Size, Button)
+	local Label = Instance.new(string.format("Text%s", Button and "Button" or "Label"));
+	Label.Text = Text;
+	Label.Font = Font;
+	Label.TextSize = Size;
+	Label.BackgroundTransparency = 1;
+	Label.TextXAlignment = Enum.TextXAlignment.Left;
+	Label.RichText = true;
+	Label.TextColor3 = Color3.fromRGB(255, 255, 255);
+	return Label;
+end
+
+local function TitleLabel(Text)
+	return Label(Text, TitleSettings.Font, TitleSettings.Size);
+end
+
+local function DescriptionLabel(Text)
+	return Label(Text, DescriptionSettings.Font, DescriptionSettings.Size);
+end
+
+local PropertyTweenOut = {
+	Text = "TextTransparency",
+	Fram = "BackgroundTransparency",
+	Imag = "ImageTransparency"
+}
+
+local function FadeProperty(Object)
+	local Prop = PropertyTweenOut[string.sub(Object.ClassName, 1, 4)];
+	TweenService:Create(Object, TweenInfo.new(0.25, TweenStyle, TweenDirection), {
+		[Prop] = 1;
+	}):Play();
+end
+
+local function SearchTableFor(Table, For)
+	for _, v in next, Table do
+		if (v == For) then
+			return true;
+		end
+	end
+	return false;
+end
+
+local function FindIndexByDependency(Table, Dependency)
+	for Index, Object in next, Table do
+		if (typeof(Object) == "table") then
+			local Found = SearchTableFor(Object, Dependency);
+			if (Found) then
+				return Index;
+			end
+		else
+			if (Object == Dependency) then
+				return Index;
+			end
+		end
+	end
+end
+
+local function ResetObjects()
+	for _, Object in next, InstructionObjects do
+		Object[2] = 0;
+		Object[3] = false;
+	end
+end
+
+local function FadeOutAfter(Object, Seconds)
+	wait(Seconds);
+	FadeProperty(Object);
+	for _, SubObj in next, Object:GetDescendants() do
+		FadeProperty(SubObj);
+	end
+	wait(0.25);
+	table.remove(InstructionObjects, FindIndexByDependency(InstructionObjects, Object));
+	ResetObjects();
+end
+
+return {
+	Notify = function(Properties)
+		local Properties = typeof(Properties) == "table" and Properties or {};
+		local Title = Properties.Title;
+		local Description = Properties.Description;
+		local Duration = Properties.Duration or 5;
+		if (Title) or (Description) then -- Check that user has provided title and/or description
+			local Y = Title and 26 or 0;
+			if (Description) then
+				local TextSize = TextService:GetTextSize(Description, DescriptionSettings.Size, DescriptionSettings.Font, Vector2.new(0, 0));
+				for i = 1, math.ceil(TextSize.X / MaxWidth) do
+					Y += TextSize.Y;
+				end
+				Y += 8;
+			end
+			local NewLabel = Round2px();
+			NewLabel.Size = UDim2.new(1, 0, 0, Y);
+			NewLabel.Position = UDim2.new(-1, 20, 0, CalculateBounds(CachedObjects).Y + (Padding * #CachedObjects));
+			if (Title) then
+				local NewTitle = TitleLabel(Title);
+				NewTitle.Size = UDim2.new(1, -10, 0, 26);
+				NewTitle.Position = UDim2.fromOffset(10, 0);
+				NewTitle.Parent = NewLabel;
+			end
+			if (Description) then
+				local NewDescription = DescriptionLabel(Description);
+				NewDescription.TextWrapped = true;
+				NewDescription.Size = UDim2.fromScale(1, 1) + UDim2.fromOffset(-DescriptionPadding, Title and -26 or 0);
+				NewDescription.Position = UDim2.fromOffset(10, Title and 26 or 0);
+				NewDescription.TextYAlignment = Enum.TextYAlignment[Title and "Top" or "Center"];
+				NewDescription.Parent = NewLabel;
+			end
+			Shadow2px().Parent = NewLabel;
+			NewLabel.Parent = Container;
+			table.insert(InstructionObjects, {NewLabel, 0, false});
+			coroutine.wrap(FadeOutAfter)(NewLabel, Duration);
+		end
+	end,
+}
