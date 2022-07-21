@@ -4,7 +4,7 @@ local Nofitication = {}
 local STX_Nofitication = Instance.new("ScreenGui")
 local STX_NofiticationUIListLayout = Instance.new("UIListLayout")
 STX_Nofitication.Name = "STX_Nofitication"
-syn.protect_gui(STX_Nofitication)
+if syn then syn.protect_gui(STX_Nofitication) end
 STX_Nofitication.Parent = game.CoreGui
 STX_Nofitication.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 STX_Nofitication.ResetOnSpawn = false
