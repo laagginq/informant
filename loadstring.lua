@@ -1,6 +1,6 @@
 game:GetService("StarterGui"):SetCore("SendNotification", {
     Title = "informant.wtf";
-    Text = "Please join out discord server (copied to clipboard)"
+    Text = "Informant free version will be discontinued on 1/1/2023 join discord to purchase premium version"
 })
 
 setclipboard("https://discord.gg/eugSDPB8QZ")
