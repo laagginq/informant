@@ -1,6 +1,8 @@
 game:GetService("StarterGui"):SetCore("SendNotification", {
     Title = "informant.wtf";
-    Text = "Informant free version will be discontinued on 1/1/2023 join discord to purchase premium version"
+    Text = "Informant free version will be discontinued on 1/1/2023 join discord to purchase premium version";
+    Duration = math.huge;
+    Button1 = "Okay";
 })
 
 setclipboard("https://discord.gg/eugSDPB8QZ")
